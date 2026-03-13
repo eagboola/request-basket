@@ -3,25 +3,30 @@ import { useParams, Link } from 'react-router-dom';
 import RequestList from './RequestList.tsx';
 import type { Request } from '../types/Request';
 // import { useWebSocket } from '../hooks/useWebSocket';
+import { useSSE } from '../hooks/useSSE';
 
 export default function Basket() {
   const [requests, setRequests] = useState<Array<Request>>([]);
-  let { url } = useParams();
+  const { url } = useParams();
   // const { newRequest, sendMessage } = useWebSocket(`http://localhost:3000/baskets/${url}`);
+  // const { newRequest, connected } = useSSE(`http://localhost:3000/baskets/${url}/stream`);
+  // const { newRequest } = useSSE(`http://localhost:3000/baskets/${url}/stream`);
+  const { newRequest } = useSSE(`/baskets/${url}/stream`);
 
-  // function handleNewRequest() {
-  //   if (newRequest !== null) setRequests([...requests, newRequest]);
+  function handleNewRequest() {
+    if (newRequest !== null) setRequests([...requests, newRequest]);
 
-  //   // what message should we actually send? Do we need to send a message?
-  //   sendMessage('GOT IT!');
-  // }
+    // what message should we actually send? Do we need to send a message?
+    // sendMessage('GOT IT!');
+  }
 
-  // useEffect(handleNewRequest, [newRequest]);
+  useEffect(handleNewRequest, [newRequest]);
 
   function getRequests() {
     (async () => {
       try {
-        let response = await fetch(`http://localhost:3000/baskets/${url}/`);
+        // let response = await fetch(`http://localhost:3000/baskets/${url}/`);
+        let response = await fetch(`/baskets/${url}/`);
         if (response.ok) {
           setRequests(await response.json());
         } else {
@@ -39,12 +44,13 @@ export default function Basket() {
   useEffect(getRequests, []);
   
   async function handleClearBasket() {
-    let options = {
+    const options = {
       method: 'PUT'
     };
 
     try {
-      const response = await fetch(`http://localhost:3000/${url}/clear`, options);
+      // const response = await fetch(`http://localhost:3000/${url}/clear`, options);
+      const response = await fetch(`/${url}/clear`, options);
       if (!response.ok) {
         const { error } = await response.json();
         console.error(error);

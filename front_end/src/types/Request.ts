@@ -4,5 +4,4 @@ export interface Request {
   method: string,
   headers: HeadersType,
   body: string | {},
-  timestamp: string,
 }
