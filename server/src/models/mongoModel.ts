@@ -19,7 +19,7 @@ export const mongoModel = {
     const newRequest = new Request(data);
 
     try {
-      await newRequest.save();
+      return await newRequest.save();
     } catch (e) {
       console.error(e);
       throw new Error('Failed to save request to DB');
