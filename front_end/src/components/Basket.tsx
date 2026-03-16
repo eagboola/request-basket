@@ -11,7 +11,7 @@ export default function Basket() {
   // const { newRequest, sendMessage } = useWebSocket(`http://localhost:3000/baskets/${url}`);
   // const { newRequest, connected } = useSSE(`http://localhost:3000/baskets/${url}/stream`);
   // const { newRequest } = useSSE(`http://localhost:3000/baskets/${url}/stream`);
-  const { newRequest } = useSSE(`/baskets/${url}/stream`);
+  const { newRequest } = useSSE(`http://localhost:3000/api/baskets/${url}/stream`);
 
   function handleNewRequest() {
     if (newRequest !== null) setRequests([...requests, newRequest]);
@@ -25,8 +25,8 @@ export default function Basket() {
   function getRequests() {
     (async () => {
       try {
-        // let response = await fetch(`http://localhost:3000/baskets/${url}/`);
-        let response = await fetch(`/baskets/${url}/`);
+        let response = await fetch(`http://localhost:3000/api/baskets/${url}`);
+        // let response = await fetch(`/api/baskets/${url}/`);
         if (response.ok) {
           setRequests(await response.json());
         } else {
@@ -35,7 +35,7 @@ export default function Basket() {
         }
       } catch (e: Error | unknown) {
         if (e instanceof Error) {
-          console.error(e)
+          console.error(e);
         }
       }
     })();
@@ -50,7 +50,7 @@ export default function Basket() {
 
     try {
       // const response = await fetch(`http://localhost:3000/${url}/clear`, options);
-      const response = await fetch(`/${url}/clear`, options);
+      const response = await fetch(`/api/${url}/clear`, options);
       if (!response.ok) {
         const { error } = await response.json();
         console.error(error);

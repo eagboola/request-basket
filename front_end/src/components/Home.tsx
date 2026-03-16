@@ -33,7 +33,7 @@ export default function Home() {
     };
 
     try {
-      let response = await fetch(`http://localhost:3000/baskets/create/${basketName}`, options);
+      let response = await fetch(`http://localhost:3000/api/baskets/create/${basketName}`, options);
       if (response.ok) {
         console.log('Basket successfully created');
         let token: BasketToken = await response.json();
@@ -41,7 +41,7 @@ export default function Home() {
         localStorage.setItem(Object.keys(token)[0], Object.values(token)[0]);
         let urls: BasketUrls = {
           viewBasket: `http://localhost:3000/baskets/${basketName}`,
-          sendToBasket: `http://localhost:3000/${basketName}`,
+          sendToBasket: `http://localhost:3000/api/${basketName}`,
         }
         setUrls(urls);
         setVisibleModal(true);

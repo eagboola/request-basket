@@ -14,7 +14,7 @@ const pool = new Pool({
 export const pgModel = {
   async addNewBasket(endpoint: string) {
     const token = generateToken(endpoint);
-    const command = 'INSERT INTO baskets (basket_endpoint, token) VALUES ($1, $2)';
+    const command = 'INSERT INTO baskets (endpoint, token) VALUES ($1, $2)';
 
     try {
       await pool.query(command, [endpoint, token]);
@@ -26,7 +26,7 @@ export const pgModel = {
   },
   
   async getBasketToken(endpoint: string) {
-    const command = 'SELECT token FROM baskets WHERE basket_endpoint = $1;';
+    const command = 'SELECT token FROM baskets WHERE endpoint = $1;';
 
     try {
       const res = await pool.query(command, [endpoint]);

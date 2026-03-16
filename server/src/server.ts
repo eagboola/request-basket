@@ -14,10 +14,13 @@ app.use(cors());
 
 const httpRouter = Router();
 registerHttpRoutes(httpRouter);
-app.use("/", httpRouter);
+app.use("/api/", httpRouter);
 
 // Must be _after_ HTTP routes are mounted.
+// Comment out next (4) lines when deploying to nginx.
 app.use(express.static(path.resolve(__dirname, "../../front_end/dist")));
+
+// Not necessary in nginx deployment
 app.get("*splat", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../../front_end/dist", "index.html"));
 });
