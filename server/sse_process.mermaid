@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant FE as Frontend
+    participant BE as Backend
+    participant DB as Database
+    participant EX as External Sender
+
+    FE->>BE: GET /baskets/:basketId
+    BE->>DB: query requests
+    DB-->>BE: results
+    BE-->>FE: [existing requests]
+
+    FE->>BE: GET /baskets/:basketId/stream
+    note over FE,BE: SSE connection stays open
+    BE->>BE: clients.set(basketId, res)
+
+    EX->>BE: POST /:basketId
+    BE->>DB: save to DB
+    BE->>BE: clients.get(basketId)
+    BE-->>FE: SSE event (new request)

@@ -1,0 +1,33 @@
+[
+  {
+    "method": "GET",
+    "headers": {
+
+    },
+    "body": "THIS IS THE PAYLOAD?",
+    "timestamp": "Monday the whatever"
+  },
+
+  {
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "I DON'T KNOW",
+      "reason": "THIS IS MY FIRST TIME BEING ALIVE GIVE ME A SECOND"
+    },
+    "timestamp": "I don't know what format these will arrive in"
+  },
+
+    {
+    "method": "PUT",
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "body": {
+        "randomKey": "RandomValue"
+    },
+    "timestamp": "Monday the whatever"
+  }
+]
