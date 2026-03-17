@@ -16,9 +16,7 @@ export default function Modal({urls, setVisibleModal}:
     // For deployment, we'd want to either:
     // - use a registered domain with https
     // - use an npm library like `copy-to-clipboard` or `clipboard-copy`
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(urls.sendToBasket);
-    } else {}
+    copy(urls.sendToBasket);
   }
 
   const basketName = urls.sendToBasket.split('/').slice(-1)[0];
