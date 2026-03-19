@@ -1,5 +1,4 @@
 CREATE TABLE baskets (
-  id SERIAL PRIMARY KEY,
-  basket_endpoint varchar(25) NOT NULL UNIQUE,
+  endpoint varchar(25) PRIMARY KEY,
   token TEXT NOT NULL UNIQUE
 );

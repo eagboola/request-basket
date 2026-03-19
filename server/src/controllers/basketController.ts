@@ -96,7 +96,8 @@ export const basketController = {
         }
       }
     } catch (e) {
-      console.error(e);
+      console.error("addNewBasket error", e);
+      res.status(400).json({ error: "Basket could not be created " });
     }
   },
 
@@ -141,4 +142,8 @@ export const basketController = {
       res.status(400).json({ error: "Basket doesn't exist!" });
     }
   },
+  
+  async handleHealthCheck(req: Request, res: Response) {
+    res.status(200).json({ message: "Server is running normall." });
+  }
 };

@@ -14,5 +14,7 @@ export function registerHttpRoutes(router: Router) {
 
   router.put("/:endpoint/clear", basketController.handleClearBasket);
 
+  router.get("/health", basketController.handleHealthCheck);
+
   router.all("/:endpoint", basketController.handleWebhookRequest);
 }
